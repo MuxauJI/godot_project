@@ -1,10 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://711bojlm5bsc"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_sl48t"]
+[ext_resource type="PackedScene" uid="uid://cdvombqmcrj23" path="res://labels/label_scene.tscn" id="1_rvequ"]
 
-[node name="field" type="Node2D"]
-script = ExtResource("1_sl48t")
+[node name="Main" type="Node2D"]
 
-[node name="window_size" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="label_scene" parent="." instance=ExtResource("1_rvequ")]
