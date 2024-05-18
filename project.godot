@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="Custom Button"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://custom_button/button_scene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=480
+window/size/viewport_width=640
 window/size/viewport_height=800
+window/handheld/orientation=1
 
 [rendering]
 

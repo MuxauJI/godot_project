@@ -1,18 +1,30 @@
 extends VBoxContainer
 
-const grid_cell_count = 13
-const grid_cell_size = 32
+var grid_cell_count = 10
 var mines_count = 10
 var mines_field = []
-var grid_size = Vector2(grid_cell_count, grid_cell_count)
-var cell_size = Vector2(grid_cell_size, grid_cell_size)
+var grid_cell_size = 0
+var grid_size = Vector2.ZERO
+var cell_size = Vector2.ZERO
 var stretch = TextureButton.STRETCH_SCALE
+
+func _init():
+	pass
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_sizes()
 	create_label()
 	fill_grid_container()
 	pass # Replace with function body.
-
+	
+func get_sizes():
+	var screen_size = get_viewport().get_visible_rect().size
+	grid_cell_size = screen_size.x / grid_cell_count - 10
+	grid_size = Vector2(grid_cell_count, grid_cell_count)
+	cell_size = Vector2(grid_cell_size, grid_cell_size)
+	
+	
 func create_label():
 	var label = Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
