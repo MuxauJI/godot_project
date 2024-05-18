@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5fw7h482lywq"]
+
+[ext_resource type="Script" path="res://custom_button/button_scene.gd" id="1_5iods"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_45kap"]
+load_path = "res://.godot/imported/white_button.png-5c9ad0a6eb0fe34007dea8d58a1ae1cd.ctex"
+
+[node name="button_scene" type="Node2D"]
+script = ExtResource("1_5iods")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="TextureButton" type="TextureButton" parent="GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = SubResource("CompressedTexture2D_45kap")
+stretch_mode = 0
