@@ -7,6 +7,7 @@ var grid_cell_size = 0
 var grid_size = Vector2.ZERO
 var cell_size = Vector2.ZERO
 var stretch = TextureButton.STRETCH_SCALE
+var mine_flag = preload("res://custom_button/minesweeper_flag.svg")
 
 func _init():
 	pass
@@ -34,6 +35,9 @@ func create_label():
 func fill_grid_container():
 	var grid_container = GridContainer.new()
 	grid_container.columns = grid_cell_count
+	# Настройка отступов для удаления зазоров
+	#grid_container.  # Горизонтальные зазоры
+	#grid_container.custom_constants.set("vseparation", 0)  # Вертикальные зазоры
 	add_child(grid_container)
 	for y in range(grid_size.y):
 		mines_field.append([])
@@ -47,7 +51,9 @@ func fill_grid_container():
 func _on_button_pressed(x,y):
 	#print("Button %d %d" % [x,y])
 	var cell_button = mines_field[y][x]
+	#cell_button.texture_disabled = mine_flag
 	cell_button.disabled = true
+	cell_button.add_overlay()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

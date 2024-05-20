@@ -2,8 +2,9 @@ extends TextureButton
 
 class_name SquareButton
 
-var texture_white = preload("res://custom_button/white_25.png")
-var texture_grey = preload("res://custom_button/grey_25.png")
+var texture_white = preload("res://custom_button/clear_button32.svg")
+var pressed_button = preload("res://custom_button/disable_button.svg")
+var flag_button = preload("res://custom_button/flag_button.svg")
 var stretch = TextureButton.STRETCH_SCALE
 var default_size = Vector2(32,32)
 var x: int = 0
@@ -18,6 +19,8 @@ func _init(default_size, stretch, x, y):
 	
 func _ready():
 	texture_normal = texture_white
-	texture_pressed = texture_grey
-	texture_disabled = texture_grey
-	
+	texture_pressed = pressed_button
+	texture_disabled = flag_button
+
+func add_overlay():
+	pass
