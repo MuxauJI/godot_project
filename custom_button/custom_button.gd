@@ -7,6 +7,7 @@ var pressed_button = preload("res://custom_button/disable_button.svg")
 var flag_button = preload("res://custom_button/flag_button.svg")
 var x : int
 var y : int
+var is_mine : bool = false
 
 func _init(default_size, stretch, xx, yy):
 	custom_minimum_size = default_size
@@ -19,7 +20,7 @@ func _init(default_size, stretch, xx, yy):
 func _ready():
 	texture_normal = texture_white
 	texture_pressed = pressed_button
-	texture_disabled = flag_button
+	texture_disabled = pressed_button
 
 func add_overlay():
 	pass
