@@ -1,11 +1,12 @@
 extends VBoxContainer
 
-var grid_cell_count = 10
+var grid_cell_count = 20
 var mines_count = 10
 var mines_field = []
-var grid_cell_size = 0
+var grid_cell_size = 32
+
 var grid_size = Vector2.ZERO
-var cell_size = Vector2.ZERO
+var cell_size = Vector2(16,16)
 var stretch = TextureButton.STRETCH_SCALE
 var mine_flag = preload("res://custom_button/minesweeper_flag.svg")
 
@@ -21,7 +22,9 @@ func _ready():
 	
 func get_sizes():
 	var screen_size = get_viewport().get_visible_rect().size
-	grid_cell_size = screen_size.x / grid_cell_count - 10
+	# вычисляем размер клетки +1 (для отступа от края)
+	grid_cell_size = screen_size.x / (grid_cell_count + 1)
+	print(grid_cell_size)
 	grid_size = Vector2(grid_cell_count, grid_cell_count)
 	cell_size = Vector2(grid_cell_size, grid_cell_size)
 	
@@ -36,8 +39,8 @@ func fill_grid_container():
 	var grid_container = GridContainer.new()
 	grid_container.columns = grid_cell_count
 	# Настройка отступов для удаления зазоров
-	#grid_container.  # Горизонтальные зазоры
-	#grid_container.custom_constants.set("vseparation", 0)  # Вертикальные зазоры
+	grid_container.add_theme_constant_override("h_separation", 0)
+	grid_container.add_theme_constant_override("v_separation", 0)	
 	add_child(grid_container)
 	for y in range(grid_size.y):
 		mines_field.append([])
@@ -56,5 +59,6 @@ func _on_button_pressed(x,y):
 	cell_button.add_overlay()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta):
+#	#print(delta)
+#	pass
