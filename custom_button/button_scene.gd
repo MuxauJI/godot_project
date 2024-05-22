@@ -31,6 +31,10 @@ var toolbar = HBoxContainer.new()
 var flags_left_label = Label.new()
 var flags_left = mines_count
 
+var toggle_tool_button = TextureButton.new()  # Change this line
+var shovel_texture = preload("res://custom_button/shovel.png")  # Add this line
+var flag_texture = preload("res://custom_button/minesweeper_flag.svg")
+
 func _init():
 	pass
 	
@@ -39,13 +43,28 @@ func _ready():
 	get_sizes()
 	create_toolbar()
 	create_restart_button()
+	create_toggle_tool_button()
 	fill_grid_container()
 	place_mines()
+	
 	pass
 
+func create_toggle_tool_button():
+	# Set the initial texture to shovel
+	pass
+
+func _on_toggle_tool_button_pressed():
+	if current_tool == Tool.SHOVEL:
+		current_tool = Tool.FLAG
+		toggle_tool_button.texture_normal = flag_texture
+	else:
+		current_tool = Tool.SHOVEL
+		toggle_tool_button.texture_normal = shovel_texture
+		
 func create_restart_button():
 	restart_button.text = "Restart"
 	restart_button.connect("pressed", Callable(self, "_on_restart_button_pressed"))
+	restart_button.custom_minimum_size = Vector2(grid_cell_size, grid_cell_size)
 	restart_button.visible = false
 	add_child(restart_button)
 
@@ -54,20 +73,20 @@ func _on_restart_button_pressed():
 	
 func create_toolbar():
 	toolbar.alignment = BoxContainer.ALIGNMENT_CENTER
-	var shovel_button = Button.new()
-	shovel_button.text = "Shovel"
-	shovel_button.connect("pressed", Callable(self, "_on_shovel_button_pressed"))
-	toolbar.add_child(shovel_button)
 	
-	var flag_button = Button.new()
-	flag_button.text = "Flag"
-	flag_button.connect("pressed", Callable(self, "_on_flag_button_pressed"))
-	toolbar.add_child(flag_button)
+	var hbox_container = HBoxContainer.new()
+	hbox_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	toggle_tool_button.texture_normal = shovel_texture
+	toggle_tool_button.custom_minimum_size = Vector2(grid_cell_size, grid_cell_size) 
+	toggle_tool_button.ignore_texture_size = true
+	toggle_tool_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	toggle_tool_button.connect("pressed", Callable(self, "_on_toggle_tool_button_pressed"))
 	
 	flags_left_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	flags_left_label.text = "Flags left: %d" % [flags_left]
-	toolbar.add_child(flags_left_label)
-	
+	hbox_container.add_child(flags_left_label)
+	hbox_container.add_child(toggle_tool_button)
+	toolbar.add_child(hbox_container)
 	add_child(toolbar)
 
 func _on_shovel_button_pressed():

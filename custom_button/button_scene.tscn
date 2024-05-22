@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5fw7h482lywq"]
+[gd_scene load_steps=3 format=3 uid="uid://c5fw7h482lywq"]
 
 [ext_resource type="Script" path="res://custom_button/button_scene.gd" id="1_5iods"]
+[ext_resource type="Texture2D" uid="uid://b6okm5p6n5mlp" path="res://custom_button/shovel.png" id="2_12brd"]
 
 [node name="CenterContainer" type="CenterContainer"]
 clip_contents = true
@@ -17,3 +18,11 @@ size_flags_stretch_ratio = 0.0
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 script = ExtResource("1_5iods")
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture_normal = ExtResource("2_12brd")
+ignore_texture_size = true
+stretch_mode = 0
